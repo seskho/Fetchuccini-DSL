@@ -1,10 +1,10 @@
-# WebFetch (FetchUccini) 🌐🔍
+# WebFetch (FetchUccini)
 
 > **Lenguaje de Dominio Específico (DSL) declarativo para la extracción automatizada y estructurada de datos web (Web Scraping).**
 
 ---
 
-## 📌 Información del Proyecto
+##  Información del Proyecto
 
 * **Institución:** Universidad Peruana de Ciencias Aplicadas (UPC)
 * **Carrera:** Ciencias de la Computación
@@ -18,7 +18,7 @@
 
 ---
 
-## 👥 Integrantes del Equipo
+##  Integrantes del Equipo
 
 | Apellidos y Nombres | Rol / Contribución |
 | :--- | :--- |
@@ -29,7 +29,7 @@
 
 ---
 
-## 📖 Descripción y Motivación
+##  Descripción y Motivación
 
 Tradicionalmente, la extracción de datos web (*web scraping*) se realiza de manera imperativa mediante lenguajes como Python o JavaScript, requiriendo la escritura manual de peticiones HTTP, parseo del árbol DOM, manejo de bucles y serialización a JSON o CSV. Este enfoque es propenso a errores y genera código repetitivo.
 
@@ -54,7 +54,7 @@ EXPORT AS JSON TO "resultados_libros.json";
 
 ---
 
-## 📂 Estructura del Repositorio
+##  Estructura del Repositorio
 
 ```text
 WebFetch/
@@ -90,7 +90,7 @@ WebFetch/
 
 ---
 
-## ⚙️ Requisitos e Instalación
+##  Requisitos e Instalación
 
 ### Prerrequisitos:
 * **Python** 3.10 o superior.
@@ -103,7 +103,7 @@ pip install -r requirements.txt
 
 ---
 
-## 🚀 Guía de Ejecución
+##  Guía de Ejecución
 
 ### 1. Compilación de Gramáticas ANTLR4:
 Para generar las clases del lexer y parser en Python a partir de los archivos `.g4`:
