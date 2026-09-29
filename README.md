@@ -1,37 +1,37 @@
-# WebFetch (FetchUccini) 🌐🔍
+# WebFetch (FetchUccini)
 
 > **Lenguaje de Dominio Específico (DSL) declarativo para la extracción automatizada y estructurada de datos web (Web Scraping).**
 
 ---
 
-## 📌 Información del Proyecto
+## Información del Proyecto
 
-* **Institución:** Universidad Peruana de Ciencias Aplicadas (UPC)
-* **Carrera:** Ciencias de la Computación
-* **Curso:** Teoría de Compiladores (1ACC0218)
-* **Sección:** 13962
-* **Profesor:** Marco Antonio Sobrevilla Cabezudo
-* **Ciclo:** 2026-2
-* **Startup:** WebFetch
-* **Producto:** FetchUccini
-* **Entregable:** Hito 1 - Trabajo Parcial
-
----
-
-## 👥 Integrantes del Equipo
-
-| Apellidos y Nombres | Rol / Contribución |
-| :--- | :--- |
-| **Diaz Orihuela, Jose Andres** | Análisis Semántico & Driver |
-| **Garcia Hernandez, Alejandro Jhoshua** | Construcciones del Lenguaje & Gramática |
-| **Landauro La Rosa, Ian Joshua** | Construcciones del Lenguaje & Pruebas |
-| **Meza Dagnino, Francesco Andre** | Analizador Léxico & Analizador Sintáctico |
+- **Institución:** Universidad Peruana de Ciencias Aplicadas (UPC)
+- **Carrera:** Ciencias de la Computación
+- **Curso:** Teoría de Compiladores (1ACC0218)
+- **Sección:** 13962
+- **Profesor:** Marco Antonio Sobrevilla Cabezudo
+- **Ciclo:** 2026-2
+- **Startup:** WebFetch
+- **Producto:** FetchUccini
+- **Entregable:** Hito 1 - Trabajo Parcial
 
 ---
 
-## 📖 Descripción y Motivación
+## Integrantes del Equipo
 
-Tradicionalmente, la extracción de datos web (*web scraping*) se realiza de manera imperativa mediante lenguajes como Python o JavaScript, requiriendo la escritura manual de peticiones HTTP, parseo del árbol DOM, manejo de bucles y serialización a JSON o CSV. Este enfoque es propenso a errores y genera código repetitivo.
+| Apellidos y Nombres                     | Rol / Contribución                        |
+| :-------------------------------------- | :---------------------------------------- |
+| **Diaz Orihuela, Jose Andres**          | Análisis Semántico & Driver               |
+| **Garcia Hernandez, Alejandro Jhoshua** | Construcciones del Lenguaje & Gramática   |
+| **Landauro La Rosa, Ian Joshua**        | Construcciones del Lenguaje & Pruebas     |
+| **Meza Dagnino, Francesco Andre**       | Analizador Léxico & Analizador Sintáctico |
+
+---
+
+## Descripción y Motivación
+
+Tradicionalmente, la extracción de datos web (_web scraping_) se realiza de manera imperativa mediante lenguajes como Python o JavaScript, requiriendo la escritura manual de peticiones HTTP, parseo del árbol DOM, manejo de bucles y serialización a JSON o CSV. Este enfoque es propenso a errores y genera código repetitivo.
 
 **WebFetch** es un DSL de naturaleza declarativa inspirado en la simplicidad de SQL. Permite definir de forma concisa **qué** datos extraer, **de dónde** y **cómo filtrarlos o guardarlos**, reduciendo complejas rutinas a consultas claras y directas compuestas por 4 cláusulas fundamentales:
 
@@ -41,6 +41,7 @@ Tradicionalmente, la extracción de datos web (*web scraping*) se realiza de man
 4. **`EXPORT`**: Determina el formato de salida (`JSON` o `CSV`) y la ruta del archivo destino (terminando con punto y coma `;`).
 
 ### Ejemplo de Consulta WebFetch:
+
 ```sql
 FETCH "https://books.toscrape.com/"
 EXTRACT {
@@ -54,7 +55,7 @@ EXPORT AS JSON TO "resultados_libros.json";
 
 ---
 
-## 📂 Estructura del Repositorio
+## Estructura del Repositorio
 
 ```text
 WebFetch/
@@ -64,8 +65,8 @@ WebFetch/
 │   └── Presentacion_Hito1.pdf          # Diapositivas de la sustentación
 │
 ├── grammar/                            # Especificaciones formales en ANTLR4
-│   ├── WebFetchLexer.g4                # Analizador léxico (expresiones regulares y tokens)
-│   └── WebFetchParser.g4               # Analizador sintáctico (gramáticas libres de contexto)
+│   ├── FetchucciniLexer.g4             # Analizador léxico (expresiones regulares y tokens)
+│   └── FetchucciniParser.g4            # Analizador sintáctico (gramáticas libres de contexto)
 │
 ├── src/                                # Código fuente del compilador
 │   ├── semantic/
@@ -90,29 +91,35 @@ WebFetch/
 
 ---
 
-## ⚙️ Requisitos e Instalación
+## Requisitos e Instalación
 
 ### Prerrequisitos:
-* **Python** 3.10 o superior.
-* **Java Development Kit (JDK)** 17 o superior (para generar los parsers con la herramienta ANTLR4).
+
+- **Python** 3.10 o superior.
+- **Java Development Kit (JDK)** 17 o superior (para generar los parsers con la herramienta ANTLR4).
 
 ### Instalación de dependencias:
+
 ```bash
 pip install -r requirements.txt
 ```
 
 ---
 
-## 🚀 Guía de Ejecución
+## Guía de Ejecución
 
 ### 1. Compilación de Gramáticas ANTLR4:
+
 Para generar las clases del lexer y parser en Python a partir de los archivos `.g4`:
+
 ```bash
-antlr4 -Dlanguage=Python3 -visitor -no-listener grammar/WebFetchLexer.g4 grammar/WebFetchParser.g4 -o src/generated
+antlr4 -Dlanguage=Python3 -visitor -no-listener grammar/FetchucciniLexer.g4 grammar/FetchucciniParser.g4 -o src/generated
 ```
 
 ### 2. Ejecución de Consultas con el Driver:
+
 Para analizar una consulta fuente (`.wf`):
+
 ```bash
 # Probar caso válido
 python src/driver.py tests/valid/01_consulta_basica.wf

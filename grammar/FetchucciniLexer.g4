@@ -1,4 +1,4 @@
-lexer grammar WebFetchLexer;
+lexer grammar FetchucciniLexer;
 
 // ==========================================
 // 1. PALABRAS CLAVE (Keywords)
