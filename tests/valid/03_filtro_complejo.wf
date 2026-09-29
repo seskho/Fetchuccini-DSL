@@ -1,0 +1,7 @@
+FETCH "https://prueba.com/articulos"
+EXTRACT {
+    titulo: text FROM "h1",
+    precio: regex("[0-9.]+") FROM ".price"
+}
+WHERE precio >= 10 AND precio <= 50
+EXPORT AS JSON TO "precios.json";

@@ -41,6 +41,6 @@ Thumbs.db
 desktop.ini
 
 # Archivos generados automáticamente por ANTLR4
-src/generated/
+.antlr/
 *.tokens
 *.interp

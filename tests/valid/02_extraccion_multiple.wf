@@ -1,0 +1,8 @@
+FETCH "https://prueba.com/productos"
+EXTRACT {
+    titulo: text FROM "h2",
+    enlace: attr("href") FROM "a",
+    precio: regex("[0-9.]+") FROM ".price"
+}
+WHERE precio < 25.00
+EXPORT AS CSV TO "precios.csv";

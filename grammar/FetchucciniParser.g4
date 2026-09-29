@@ -1,84 +1,61 @@
 parser grammar FetchucciniParser;
 
 options {
-    tokenVocab = FetchucciniLexer;
+	tokenVocab = FetchucciniLexer;
 }
 
-// ==========================================
 // Regla inicial del programa
-// ==========================================
-program
-    : query EOF
-    ;
 
-// ==========================================
+program: query EOF;
+
 // Estructura de una consulta Fetchuccini
-// ==========================================
-query
-    : fetchClause extractClause whereClause? exportClause
-    ;
+query: fetchClause extractClause whereClause? exportClause;
 
-// ==========================================
-// 1. Cláusula FETCH
-// ==========================================
-fetchClause
-    : KW_FETCH url=STRING
-    ;
+// Cláusula FETCH
 
-// ==========================================
-// 2. Cláusula EXTRACT
-// ==========================================
-extractClause
-    : KW_EXTRACT LBRACE fieldList RBRACE
-    ;
+fetchClause: KW_FETCH url = STRING;
 
-fieldList
-    : fieldDef (COMMA fieldDef)*
-    ;
+// Cláusula EXTRACT
+extractClause: KW_EXTRACT LBRACE fieldList RBRACE;
 
-fieldDef
-    : alias=ID COLON extractor KW_FROM selector=STRING
-    ;
+fieldList: fieldDef (COMMA fieldDef)*;
 
-extractor
-    : KW_TEXT                             # TextExtractor
-    | KW_ATTR LPAREN attrName=STRING RPAREN # AttrExtractor
-    | KW_REGEX LPAREN pattern=STRING RPAREN # RegexExtractor
-    ;
+fieldDef: alias = ID COLON extractor KW_FROM selector = STRING;
 
-// ==========================================
-// 3. Cláusula WHERE (Opcional)
+extractor:
+	KW_TEXT										# TextExtractor
+	| KW_ATTR LPAREN attrName = STRING RPAREN	# AttrExtractor
+	| KW_REGEX LPAREN pattern = STRING RPAREN	# RegexExtractor;
+
+// Cláusula WHERE (Opcional)
+
 // Precedencia: AND tiene mayor prioridad que OR
-// ==========================================
-whereClause
-    : KW_WHERE condition
-    ;
+whereClause: KW_WHERE condition;
 
-condition
-    : condition OP_OR condition          # OrCondition
-    | condition OP_AND condition         # AndCondition
-    | LPAREN condition RPAREN            # GroupCondition
-    | comparison                         # RelationalCondition
-    ;
+condition:
+	condition OP_OR condition		# OrCondition
+	| condition OP_AND condition	# AndCondition
+	| LPAREN condition RPAREN		# GroupCondition
+	| comparison					# RelationalCondition;
 
-comparison
-    : left=expression op=(OP_EQ | OP_NEQ | OP_LT | OP_LE | OP_GT | OP_GE) right=expression
-    ;
+comparison:
+	left = expression op = (
+		OP_EQ
+		| OP_NEQ
+		| OP_LT
+		| OP_LE
+		| OP_GT
+		| OP_GE
+	) right = expression;
 
-expression
-    : ID                                  # IdExpr
-    | NUMBER                              # NumberExpr
-    | STRING                              # StringExpr
-    ;
+expression:
+	ID			# IdExpr
+	| NUMBER	# NumberExpr
+	| STRING	# StringExpr;
 
-// ==========================================
-// 4. Cláusula EXPORT
-// ==========================================
-exportClause
-    : KW_EXPORT KW_AS format KW_TO path=STRING SEMICOLON
-    ;
+// Cláusula EXPORT
 
-format
-    : KW_JSON
-    | KW_CSV
-    ;
+exportClause:
+	KW_EXPORT KW_AS format KW_TO path = STRING SEMICOLON;
+
+format: KW_JSON | KW_CSV;

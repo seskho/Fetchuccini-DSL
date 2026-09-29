@@ -1,0 +1,6 @@
+-- Falta cerrar llave y punto y coma final
+FETCH "https://prueba.com"
+EXTRACT {
+    titulo: text FROM "h1"
+EXPORT AS JSON TO "datos.json"
+

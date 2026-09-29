@@ -1,0 +1,8 @@
+-- Campo duplicado en EXTRACT
+FETCH "https://prueba.com/productos"
+EXTRACT {
+    titulo: text FROM "h1",
+    titulo: attr("href") FROM "a.link"
+}
+EXPORT AS JSON TO "salida.json";
+

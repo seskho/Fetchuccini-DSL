@@ -1,0 +1,9 @@
+-- Campo no declarado en WHERE
+FETCH "https://prueba.com/productos"
+EXTRACT {
+    titulo: text FROM "h1",
+    precio: regex("[0-9.]+") FROM ".price"
+}
+WHERE stock > 0
+EXPORT AS JSON TO "salida.json";
+
