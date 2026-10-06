@@ -24,9 +24,15 @@ wheels/
 *.egg
 
 # Entornos virtuales
-.venv
+.venv/
 pip-log.txt
 pip-delete-this-directory.txt
+
+# Logs y pruebas
+*.log
+.coverage
+htmlcov/
+.pytest_cache/
 
 # IDEs y Editores
 .vscode/
@@ -40,7 +46,7 @@ pip-delete-this-directory.txt
 Thumbs.db
 desktop.ini
 
-# Archivos generados automáticamente por ANTLR4
+# Archivos auxiliares generados por ANTLR4
 .antlr/
 *.tokens
 *.interp

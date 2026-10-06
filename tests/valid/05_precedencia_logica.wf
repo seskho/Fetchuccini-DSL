@@ -1,0 +1,9 @@
+-- Consulta válida combinando operadores AND y OR para validar precedencia lógica (AND > OR)
+FETCH "https://prueba.com/tienda"
+EXTRACT {
+    categoria: text FROM ".cat",
+    precio: regex("[0-9.]+") FROM ".price",
+    disponible: text FROM ".stock"
+}
+WHERE categoria == "Libros" AND precio < 50.00 OR disponible == "En stock"
+EXPORT AS CSV TO "seleccion.csv";

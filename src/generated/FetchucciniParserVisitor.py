@@ -59,28 +59,23 @@ class FetchucciniParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by FetchucciniParser#RelationalCondition.
-    def visitRelationalCondition(self, ctx:FetchucciniParser.RelationalConditionContext):
+    # Visit a parse tree produced by FetchucciniParser#condition.
+    def visitCondition(self, ctx:FetchucciniParser.ConditionContext):
         return self.visitChildren(ctx)
 
 
-    # Visit a parse tree produced by FetchucciniParser#GroupCondition.
-    def visitGroupCondition(self, ctx:FetchucciniParser.GroupConditionContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by FetchucciniParser#OrCondition.
-    def visitOrCondition(self, ctx:FetchucciniParser.OrConditionContext):
-        return self.visitChildren(ctx)
-
-
-    # Visit a parse tree produced by FetchucciniParser#AndCondition.
-    def visitAndCondition(self, ctx:FetchucciniParser.AndConditionContext):
+    # Visit a parse tree produced by FetchucciniParser#conditionAnd.
+    def visitConditionAnd(self, ctx:FetchucciniParser.ConditionAndContext):
         return self.visitChildren(ctx)
 
 
     # Visit a parse tree produced by FetchucciniParser#comparison.
     def visitComparison(self, ctx:FetchucciniParser.ComparisonContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by FetchucciniParser#relOp.
+    def visitRelOp(self, ctx:FetchucciniParser.RelOpContext):
         return self.visitChildren(ctx)
 
 

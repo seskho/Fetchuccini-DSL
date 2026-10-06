@@ -1,0 +1,7 @@
+-- Consulta válida con filtro disyuntivo (OR)
+FETCH "https://prueba.com/catalogo"
+EXTRACT {
+    categoria: text FROM ".breadcrumb"
+}
+WHERE categoria == "Libros" OR categoria == "Viajes"
+EXPORT AS JSON TO "filtrados.json";

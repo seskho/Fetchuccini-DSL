@@ -1,0 +1,6 @@
+-- Error Léxico: contiene un carácter no reconocido por el analizador léxico ('@')
+FETCH "https://prueba.com"
+EXTRACT {
+    precio: text FROM @selector
+}
+EXPORT AS JSON TO "datos.json";

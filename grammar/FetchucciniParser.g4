@@ -1,61 +1,75 @@
 parser grammar FetchucciniParser;
 
 options {
-	tokenVocab = FetchucciniLexer;
+    tokenVocab = FetchucciniLexer;
 }
 
-// Regla inicial del programa
+program
+    : query EOF
+    ;
 
-program: query EOF;
+query
+    : fetchClause extractClause whereClause? exportClause
+    ;
 
-// Estructura de una consulta Fetchuccini
-query: fetchClause extractClause whereClause? exportClause;
+fetchClause
+    : KW_FETCH url=STRING
+    ;
 
-// Cláusula FETCH
+extractClause
+    : KW_EXTRACT LBRACE fieldList RBRACE
+    ;
 
-fetchClause: KW_FETCH url = STRING;
+fieldList
+    : fieldDef (COMMA fieldDef)*
+    ;
 
-// Cláusula EXTRACT
-extractClause: KW_EXTRACT LBRACE fieldList RBRACE;
+fieldDef
+    : alias=ID COLON extractor KW_FROM selector=STRING
+    ;
 
-fieldList: fieldDef (COMMA fieldDef)*;
+extractor
+    : KW_TEXT                               # TextExtractor
+    | KW_ATTR LPAREN attrName=STRING RPAREN # AttrExtractor
+    | KW_REGEX LPAREN pattern=STRING RPAREN # RegexExtractor
+    ;
 
-fieldDef: alias = ID COLON extractor KW_FROM selector = STRING;
+whereClause
+    : KW_WHERE condition
+    ;
 
-extractor:
-	KW_TEXT										# TextExtractor
-	| KW_ATTR LPAREN attrName = STRING RPAREN	# AttrExtractor
-	| KW_REGEX LPAREN pattern = STRING RPAREN	# RegexExtractor;
+condition
+    : conditionAnd (OP_OR conditionAnd)*
+    ;
 
-// Cláusula WHERE (Opcional)
+conditionAnd
+    : comparison (OP_AND comparison)*
+    ;
 
-// Precedencia: AND tiene mayor prioridad que OR
-whereClause: KW_WHERE condition;
+comparison
+    : left=expression relOp right=expression
+    ;
 
-condition:
-	condition OP_OR condition		# OrCondition
-	| condition OP_AND condition	# AndCondition
-	| LPAREN condition RPAREN		# GroupCondition
-	| comparison					# RelationalCondition;
+relOp
+    : OP_EQ
+    | OP_NEQ
+    | OP_LT
+    | OP_LE
+    | OP_GT
+    | OP_GE
+    ;
 
-comparison:
-	left = expression op = (
-		OP_EQ
-		| OP_NEQ
-		| OP_LT
-		| OP_LE
-		| OP_GT
-		| OP_GE
-	) right = expression;
+expression
+    : ID        # IdExpr
+    | NUMBER    # NumberExpr
+    | STRING    # StringExpr
+    ;
 
-expression:
-	ID			# IdExpr
-	| NUMBER	# NumberExpr
-	| STRING	# StringExpr;
+exportClause
+    : KW_EXPORT KW_AS format KW_TO path=STRING SEMICOLON
+    ;
 
-// Cláusula EXPORT
-
-exportClause:
-	KW_EXPORT KW_AS format KW_TO path = STRING SEMICOLON;
-
-format: KW_JSON | KW_CSV;
+format
+    : KW_JSON
+    | KW_CSV
+    ;
