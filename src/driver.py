@@ -128,7 +128,7 @@ def run_compiler(file_path: str, verbose: bool = False) -> Tuple[bool, str]:
         return False, "semantic"
 
     print(f"   [OK] Analisis Semantico completado exitosamente (0 errores logicos).")
-    print(f"   Campos registrados en la consulta: {sorted(list(checker.symbol_table))}")
+    print(f"   Campos registrados en la tabla de simbolos: {checker.symbol_table.names()}")
 
     print("\n" + "=" * 65)
     print("[SUCCESS] COMPILACION EXITOSA: La consulta es valida lexica, sintactica y semanticamente.")
