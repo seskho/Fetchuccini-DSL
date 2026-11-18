@@ -96,3 +96,8 @@ El fixture controla los resultados y permite detectar regresiones; no representa
 Los límites de red evitan acceso libre a destinos arbitrarios; el cliente no ejecuta JavaScript. Las regex aceptadas por Python pueden ser costosas con patrones adversariales y no disponen de un timeout individual; se espera código DSL local de confianza y HTML limitado en tamaño. La resolución DNS de sistema no tiene un plazo duro controlado por el runtime. Las rutas de salida se validan y se resuelven, pero no se asume un sistema de archivos modificado hostilmente por otro proceso durante la escritura.
 
 Los resultados finales y cualquier desviación de este plan se documentan en [ESTADO_HITO2.md](ESTADO_HITO2.md).
+
+
+## Extensiones de validación
+
+Verificar literales negativos y su distinción de comentarios, ejecución con umbrales negativos, ubicación de errores en EXTRACT y WHERE, exportación de IR con nodos/precedencia/posiciones y ausencia de HTTP. Rechazar destinos IR fuera de outputs y extensiones distintas de JSON; un error de compilación no debe generar IR.

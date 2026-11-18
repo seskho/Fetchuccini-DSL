@@ -25,7 +25,7 @@ KW_STRING : 'STRING';
 
 `KW_NUMBER` identifica el nombre del tipo y `NUMBER` un literal numérico. De igual forma, `KW_STRING` representa el nombre del tipo y `STRING` un literal entre comillas. Se mantienen las palabras reservadas, operadores y delimitadores anteriores. El lexer tiene 35 reglas de token, incluidas WS y COMMENT; se emiten 33 tipos de token significativos, frente a los 30 del Hito 1.
 
-Los identificadores usan `[a-zA-Z_][a-zA-Z0-9_]*`. Los números son enteros o decimales sin signo, con al menos un dígito a cada lado del punto. No se incorporan exponentes ni operaciones aritméticas. Las palabras clave son sensibles a mayúsculas.
+Los identificadores usan `[a-zA-Z_][a-zA-Z0-9_]*`. Los números son enteros o decimales con signo negativo opcional, con al menos un dígito a cada lado del punto. No se incorporan exponentes ni operaciones aritméticas. Las palabras clave son sensibles a mayúsculas.
 
 Las cadenas conservan los escapes del Hito 1: `\b`, `\t`, `\n`, `\f`, `\r`, `\"`, `\'` y `\\`. Su decodificación explícita conserva los caracteres Unicode literales. Una regex que necesite la secuencia `\d` debe usar dos barras en el código DSL: `regex("\\d+")`. Un escape inexistente se detecta en el lexer; no se interpreta silenciosamente.
 

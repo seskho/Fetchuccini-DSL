@@ -203,3 +203,22 @@ def test_grouped_conditions_keep_short_circuit(make_plan):
     plan = make_plan('a: text FROM "b", precio: text FROM "i"',
                      'WHERE (a == "si" OR precio > 10) AND a != "no"')
     assert evaluate_filter(plan.filter_expression, {"a": "si", "precio": "no numerico"}, plan.fields)
+
+
+@pytest.mark.parametrize("where,expected_line", [("", 3), ("WHERE precio > -10", 4)])
+def test_conversion_error_keeps_source_location(make_plan, tmp_path, where, expected_line):
+    annotation = " AS NUMBER" if not where else ""
+    plan = make_plan(f'precio: text FROM "i"{annotation}', where, each='EACH "article"')
+    with pytest.raises(FetchucciniRuntimeError) as caught:
+        execute_plan(plan, tmp_path, html='<article><i>no numerico</i></article>')
+    error = caught.value
+    assert error.line == expected_line and error.column >= 0
+    assert error.field == "precio" and error.record_index == 1
+    assert f"línea {expected_line}" in str(error)
+    assert not list(tmp_path.iterdir())
+
+
+def test_negative_threshold_filters_records(make_plan, tmp_path):
+    plan = make_plan('precio: text FROM "i" AS NUMBER', 'WHERE precio < -0.5', each='EACH "article"')
+    result = execute_plan(plan, tmp_path, html='<article><i>-2</i></article><article><i>1</i></article>')
+    assert result.records == [{"precio": -2.0}]

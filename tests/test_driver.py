@@ -79,3 +79,41 @@ def test_cli_works_outside_project_cwd(tmp_path):
     assert result.returncode == 0, result.stderr
     assert "KW_EACH" in result.stdout and "Modo validación" in result.stdout
     assert not list(tmp_path.iterdir())
+
+
+
+def test_emit_ir_preserves_structure_without_http(tmp_path):
+    import json
+    client = Mock()
+    query_file = tmp_path / "query.wf"
+    query_file.write_text('FETCH "https://books.toscrape.com/" EXTRACT { a: text FROM "h1" } '
+                          'WHERE (a < -1 OR a > 10) AND a != 0 EXPORT AS CSV TO "data.csv";', encoding="utf-8")
+    assert run_compiler(str(query_file), emit_ir="plans/query.json", output_dir=tmp_path,
+                        http_client=client) == (True, "none")
+    client.fetch.assert_not_called()
+    data = json.loads((tmp_path / "plans/query.json").read_text(encoding="utf-8"))
+    assert data["ir_version"] == 1
+    plan = data["plan"]
+    assert plan["node"] == "ExecutionPlan" and plan["export_format"] == "CSV"
+    expression = plan["filter_expression"]
+    assert expression["node"] == "AndExpression"
+    assert expression["operands"][0]["node"] == "OrExpression"
+    assert expression["operands"][0]["operands"][0]["right"]["value"] == -1
+    assert not (tmp_path / "data.csv").exists()
+
+
+def test_emit_ir_cli_and_invalid_destinations(tmp_path, monkeypatch):
+    import src.driver as driver
+    from src.ir.serialization import export_plan as real_export
+    monkeypatch.setattr(driver, "export_plan", lambda plan, path, output_dir: real_export(plan, path, tmp_path))
+    assert main([str(ROOT / "examples/books_demo.wf"), "--emit-ir", "plan.json"]) == 0
+    assert (tmp_path / "plan.json").is_file()
+    for destination in ("../escape.json", "wrong.csv"):
+        assert run_compiler(str(ROOT / "examples/books_demo.wf"), emit_ir=destination,
+                            output_dir=tmp_path) == (False, "io")
+
+
+def test_emit_ir_compile_failure_creates_no_file(tmp_path):
+    assert run_compiler(str(ROOT / "tests/invalid/S05_regex_invalida.wf"),
+                        emit_ir="plan.json", output_dir=tmp_path) == (False, "semantic")
+    assert not list(tmp_path.iterdir())

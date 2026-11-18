@@ -260,3 +260,15 @@ def test_parentheses_preserve_semantic_validation(where, code):
     result = compile_source(query(fields='titulo: text FROM "h1" AS STRING', where=where))
     assert result.phase == "semantic" and result.plan is None
     assert [error.code for error in result.diagnostics] == [code]
+
+
+@pytest.mark.parametrize("literal", ["-10", "-0.5", "-0"])
+def test_negative_number_literals(literal):
+    result = compile_source(query(where=f"WHERE titulo >= {literal}"))
+    assert result.success
+    assert result.plan.filter_expression.right == NumberLiteral(float(literal))
+
+
+def test_negative_literal_and_comment_are_distinct():
+    result = compile_source(query(where='WHERE titulo >= -10 -- comentario'))
+    assert result.success and result.plan.filter_expression.right.value == -10

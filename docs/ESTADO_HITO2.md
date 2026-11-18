@@ -100,3 +100,10 @@ El informe universitario nuevo, la presentación y el video pueden elaborarse us
 4. Definir las extensiones futuras antes de ampliar el lenguaje; conservar la compatibilidad y añadir evidencia para cada nueva capacidad.
 
 No se realizaron commits ni push. Los cambios permanecen en el checkout existente para revisión; los resultados de outputs y el entorno local están excluidos del control de versiones.
+
+
+## Actualización del 18 de noviembre de 2026
+
+Se completaron las cuatro mejoras: agrupación lógica anidada, literales negativos, posición del código en errores de conversión/evaluación y exportación JSON de IR con --emit-ir. La validación ordinaria no crea archivos; --emit-ir solicita expresamente escribir el plan sin realizar HTTP.
+
+Verificación en Windows con Python 3.14: `python -m pytest -q`: **229 aprobadas, 1 integración externa excluida**; regresión histórica: **9/9**; `scripts/generate_antlr.py --check` con JAR local: los tres módulos coinciden byte por byte. Las pruebas de junctions requirieron ejecutarse fuera del sandbox por permisos. No se repitió la integración HTTP real en esta actualización.

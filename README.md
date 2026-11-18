@@ -219,3 +219,15 @@ La integración externa está deshabilitada en la ejecución normal. Sus cantida
 - [Entrega e informe](docs/ENTREGA_HITO2.md): inventario de archivos, comandos de demostración y cambios sugeridos al informe histórico.
 
 Solo se procesa HTML estático de una página por consulta. Quedan fuera del Hito 2 `LIMIT`, `ORDER BY`, `JOIN`, `GROUP BY`, agregaciones, subconsultas, múltiples FETCH, EACH anidados, XPath, paginación automática, autenticación, JavaScript, funciones de usuario, aritmética general y LLVM. Para el Hito 3 corresponde acordar con el docente la ruta de generación de código, ampliar la evidencia de validación y preparar el informe, la presentación y el video, sin atribuir a esta entrega capacidades pendientes.
+
+
+## Mejoras de expresividad y diagnóstico
+
+- WHERE admite paréntesis anidados, manteniendo AND > OR fuera de los grupos.
+- NUMBER admite enteros y decimales negativos (`-10`, `-0.5`). El signo debe estar unido al número. `--` continúa iniciando comentarios; no hay resta ni signo positivo explícito.
+- Los errores de conversión de campos indican línea y columna de la declaración; los errores al evaluar WHERE indican la comparación, además del campo y registro. Los errores de red y disco conservan sus diagnósticos por fase sin atribuir una ubicación ficticia.
+- `--emit-ir planes/consulta.json` exporta el plan compilado en JSON UTF-8 bajo outputs, con nodos etiquetados, posiciones y `ir_version: 1`. Puede combinarse con --validate-only o --execute. Solo se escribe tras compilar correctamente; no realiza HTTP por sí mismo. Sin esa opción, validar sigue sin crear archivos. Las rutas usan las mismas restricciones que las exportaciones; los errores de escritura de IR se reportan como IO02. El JSON permite inspección y demostración; no se ofrece todavía carga de planes desde archivos.
+
+```powershell
+python src/driver.py examples/books_demo.wf --validate-only --emit-ir planes/books.json
+```

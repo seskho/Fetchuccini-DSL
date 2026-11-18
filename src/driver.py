@@ -8,6 +8,7 @@ if __package__ in {None, ""}:
     sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from src.compiler import compile_file
+from src.ir.serialization import export_plan
 from src.generated.FetchucciniLexer import FetchucciniLexer
 from src.runtime.errors import FetchucciniRuntimeError
 from src.runtime.execution_engine import execute_plan
@@ -15,7 +16,7 @@ from src.runtime.execution_engine import execute_plan
 
 def run_compiler(file_path: str, verbose: bool = False, *, execute: bool = False,
                  tokens: bool = False, html_file=None, output_dir=None,
-                 http_client=None) -> tuple[bool, str]:
+                 http_client=None, emit_ir=None) -> tuple[bool, str]:
     """Conserva (éxito, fase); los argumentos nuevos son opcionales y nombrados."""
     result = compile_file(file_path)
     if tokens or verbose:
@@ -32,6 +33,13 @@ def run_compiler(file_path: str, verbose: bool = False, *, execute: bool = False
     if verbose:
         print(f"Campos: {result.symbol_table.names()}")
         print(f"Plan: {result.plan!r}")
+    if emit_ir is not None:
+        try:
+            ir_path = export_plan(result.plan, emit_ir, output_dir)
+        except FetchucciniRuntimeError as error:
+            print(f"[IO02] Error io al exportar IR: {error.message}")
+            return False, "io"
+        print(f"IR: {ir_path}")
     if not execute:
         print("Modo validación: no se ejecutó la consulta.")
         return True, "none"
@@ -63,11 +71,13 @@ def main(argv=None) -> int:
     parser.add_argument("--verbose", action="store_true", help="Mostrar tokens, símbolos y plan")
     parser.add_argument("--tokens", action="store_true", help="Mostrar tokens reconocidos")
     parser.add_argument("--html", metavar="ARCHIVO", help="Ejecutar con HTML local, sin HTTP")
+    parser.add_argument("--emit-ir", metavar="ARCHIVO.json",
+                        help="Exportar el plan JSON bajo outputs, sin requerir ejecución")
     args = parser.parse_args(argv)
     if args.html and not args.execute:
         parser.error("--html requiere --execute")
     success, _ = run_compiler(args.file, args.verbose, execute=args.execute,
-                             tokens=args.tokens, html_file=args.html)
+                             tokens=args.tokens, html_file=args.html, emit_ir=args.emit_ir)
     return 0 if success else 1
 
 

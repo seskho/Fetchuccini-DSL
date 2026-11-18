@@ -35,6 +35,16 @@ def evaluate_filter(expression, record, fields=(), record_index=1):
     field_types = {field.alias: field.declared_type for field in fields}
 
     def evaluate(node):
+        try:
+            return evaluate_node(node)
+        except FetchucciniRuntimeError as error:
+            if error.line is None and isinstance(node, Comparison):
+                error.line, error.column = node.line, node.column
+            if error.record_index is None:
+                error.record_index = record_index
+            raise
+
+    def evaluate_node(node):
         if node is None:
             return True
         if isinstance(node, AndExpression):
