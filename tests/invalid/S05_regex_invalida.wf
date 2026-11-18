@@ -1,0 +1,3 @@
+FETCH "https://example.com"
+EXTRACT { precio: regex("[0-9") FROM ".price" }
+EXPORT AS JSON TO "datos.json";

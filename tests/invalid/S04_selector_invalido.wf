@@ -1,0 +1,3 @@
+FETCH "https://example.com"
+EXTRACT { titulo: text FROM "div[" }
+EXPORT AS JSON TO "datos.json";

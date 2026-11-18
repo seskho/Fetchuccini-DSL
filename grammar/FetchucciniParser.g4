@@ -9,11 +9,15 @@ program
     ;
 
 query
-    : fetchClause extractClause whereClause? exportClause
+    : fetchClause eachClause? extractClause whereClause? exportClause
     ;
 
 fetchClause
     : KW_FETCH url=STRING
+    ;
+
+eachClause
+    : KW_EACH selector=STRING
     ;
 
 extractClause
@@ -25,7 +29,11 @@ fieldList
     ;
 
 fieldDef
-    : alias=ID COLON extractor KW_FROM selector=STRING
+    : alias=ID COLON extractor KW_FROM selector=STRING typeAnnotation?
+    ;
+
+typeAnnotation
+    : KW_AS (KW_NUMBER | KW_STRING)
     ;
 
 extractor

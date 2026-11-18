@@ -1,0 +1,9 @@
+FETCH "https://books.toscrape.com/"
+EACH "article.product_pod"
+EXTRACT {
+    titulo: attr("title") FROM "h3 a" AS STRING,
+    precio: regex("[0-9.]+") FROM "p.price_color" AS NUMBER,
+    disponibilidad: text FROM ".availability" AS STRING
+}
+WHERE precio < 25.00
+EXPORT AS CSV TO "libros.csv";

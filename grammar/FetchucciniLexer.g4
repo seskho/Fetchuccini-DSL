@@ -2,6 +2,7 @@ lexer grammar FetchucciniLexer;
 
 // PALABRAS CLAVE 
 KW_FETCH: 'FETCH';
+KW_EACH: 'EACH';
 KW_EXTRACT: 'EXTRACT';
 KW_FROM: 'FROM';
 KW_WHERE: 'WHERE';
@@ -13,6 +14,8 @@ KW_CSV: 'CSV';
 KW_TEXT: 'text';
 KW_ATTR: 'attr';
 KW_REGEX: 'regex';
+KW_NUMBER: 'NUMBER';
+KW_STRING: 'STRING';
 
 // OPERADORES LÓGICOS
 OP_AND: 'AND';

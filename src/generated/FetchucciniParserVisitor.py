@@ -1,4 +1,4 @@
-# Generated from grammar/FetchucciniParser.g4 by ANTLR 4.13.2
+# Generated from FetchucciniParser.g4 by ANTLR 4.13.2
 from antlr4 import *
 if "." in __name__:
     from .FetchucciniParser import FetchucciniParser
@@ -24,6 +24,11 @@ class FetchucciniParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by FetchucciniParser#eachClause.
+    def visitEachClause(self, ctx:FetchucciniParser.EachClauseContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by FetchucciniParser#extractClause.
     def visitExtractClause(self, ctx:FetchucciniParser.ExtractClauseContext):
         return self.visitChildren(ctx)
@@ -36,6 +41,11 @@ class FetchucciniParserVisitor(ParseTreeVisitor):
 
     # Visit a parse tree produced by FetchucciniParser#fieldDef.
     def visitFieldDef(self, ctx:FetchucciniParser.FieldDefContext):
+        return self.visitChildren(ctx)
+
+
+    # Visit a parse tree produced by FetchucciniParser#typeAnnotation.
+    def visitTypeAnnotation(self, ctx:FetchucciniParser.TypeAnnotationContext):
         return self.visitChildren(ctx)
 
 
