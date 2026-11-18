@@ -33,7 +33,7 @@ La suite normal excluye la prueba marcada `integration` salvo que se indique `--
 | Regex y espacios, `tests/test_extractor_regex.py` | Texto con saltos de línea y varios espacios, usando text y regex sobre el mismo elemento. | Solo text normaliza; regex aplica el patrón al texto original y devuelve la primera coincidencia completa. |
 | Ausencias | CSS sin coincidencia, atributo ausente y regex sin coincidencia. | None, sin error gramatical; todas las comparaciones con None son falsas. |
 | Tipos runtime | NUMBER válido, texto AUTO, valores inválidos, NaN e infinito. | Números finitos, conversiones temporales de AUTO y error R02 con campo/registro cuando no se puede convertir. |
-| Lógica runtime | AND, OR y expresiones con resultados que dependen de la precedencia. | Evaluación AND > OR, orden de registros conservado y cortocircuito real. |
+| Lógica runtime | AND, OR y expresiones con resultados que dependen de la precedencia. | Evaluación AND > OR, agrupación con paréntesis anidados, orden de registros conservado y cortocircuito real. |
 | JSON | Registros con texto Unicode, números y ausencias. | Lista de objetos UTF-8, números JSON y null. |
 | CSV | Datos con comas, comillas, Unicode y ausencias. | Encabezados en orden, una fila por registro, comillas correctas y celdas vacías para None. |
 | Resultados vacíos | EACH sin coincidencias y filtros sin registros conservados. | JSON válido vacío y CSV con encabezados. |

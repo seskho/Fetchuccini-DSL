@@ -51,7 +51,12 @@ condition
     ;
 
 conditionAnd
-    : comparison (OP_AND comparison)*
+    : conditionPrimary (OP_AND conditionPrimary)*
+    ;
+
+conditionPrimary
+    : comparison
+    | LPAREN condition RPAREN
     ;
 
 comparison

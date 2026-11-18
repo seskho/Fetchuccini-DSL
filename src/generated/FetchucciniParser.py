@@ -10,45 +10,49 @@ else:
 
 def serializedATN():
     return [
-        4,1,35,128,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
+        4,1,35,137,2,0,7,0,2,1,7,1,2,2,7,2,2,3,7,3,2,4,7,4,2,5,7,5,2,6,7,
         6,2,7,7,7,2,8,7,8,2,9,7,9,2,10,7,10,2,11,7,11,2,12,7,12,2,13,7,13,
-        2,14,7,14,2,15,7,15,2,16,7,16,1,0,1,0,1,0,1,1,1,1,3,1,40,8,1,1,1,
-        1,1,3,1,44,8,1,1,1,1,1,1,2,1,2,1,2,1,3,1,3,1,3,1,4,1,4,1,4,1,4,1,
-        4,1,5,1,5,1,5,5,5,62,8,5,10,5,12,5,65,9,5,1,6,1,6,1,6,1,6,1,6,1,
-        6,3,6,73,8,6,1,7,1,7,1,7,1,8,1,8,1,8,1,8,1,8,1,8,1,8,1,8,1,8,3,8,
-        87,8,8,1,9,1,9,1,9,1,10,1,10,1,10,5,10,95,8,10,10,10,12,10,98,9,
-        10,1,11,1,11,1,11,5,11,103,8,11,10,11,12,11,106,9,11,1,12,1,12,1,
-        12,1,12,1,13,1,13,1,14,1,14,1,14,3,14,117,8,14,1,15,1,15,1,15,1,
-        15,1,15,1,15,1,15,1,16,1,16,1,16,0,0,17,0,2,4,6,8,10,12,14,16,18,
-        20,22,24,26,28,30,32,0,3,1,0,14,15,1,0,18,23,1,0,9,10,120,0,34,1,
-        0,0,0,2,37,1,0,0,0,4,47,1,0,0,0,6,50,1,0,0,0,8,53,1,0,0,0,10,58,
-        1,0,0,0,12,66,1,0,0,0,14,74,1,0,0,0,16,86,1,0,0,0,18,88,1,0,0,0,
-        20,91,1,0,0,0,22,99,1,0,0,0,24,107,1,0,0,0,26,111,1,0,0,0,28,116,
-        1,0,0,0,30,118,1,0,0,0,32,125,1,0,0,0,34,35,3,2,1,0,35,36,5,0,0,
-        1,36,1,1,0,0,0,37,39,3,4,2,0,38,40,3,6,3,0,39,38,1,0,0,0,39,40,1,
-        0,0,0,40,41,1,0,0,0,41,43,3,8,4,0,42,44,3,18,9,0,43,42,1,0,0,0,43,
-        44,1,0,0,0,44,45,1,0,0,0,45,46,3,30,15,0,46,3,1,0,0,0,47,48,5,1,
-        0,0,48,49,5,33,0,0,49,5,1,0,0,0,50,51,5,2,0,0,51,52,5,33,0,0,52,
-        7,1,0,0,0,53,54,5,3,0,0,54,55,5,24,0,0,55,56,3,10,5,0,56,57,5,25,
-        0,0,57,9,1,0,0,0,58,63,3,12,6,0,59,60,5,29,0,0,60,62,3,12,6,0,61,
-        59,1,0,0,0,62,65,1,0,0,0,63,61,1,0,0,0,63,64,1,0,0,0,64,11,1,0,0,
-        0,65,63,1,0,0,0,66,67,5,31,0,0,67,68,5,28,0,0,68,69,3,16,8,0,69,
-        70,5,4,0,0,70,72,5,33,0,0,71,73,3,14,7,0,72,71,1,0,0,0,72,73,1,0,
-        0,0,73,13,1,0,0,0,74,75,5,7,0,0,75,76,7,0,0,0,76,15,1,0,0,0,77,87,
-        5,11,0,0,78,79,5,12,0,0,79,80,5,26,0,0,80,81,5,33,0,0,81,87,5,27,
-        0,0,82,83,5,13,0,0,83,84,5,26,0,0,84,85,5,33,0,0,85,87,5,27,0,0,
-        86,77,1,0,0,0,86,78,1,0,0,0,86,82,1,0,0,0,87,17,1,0,0,0,88,89,5,
-        5,0,0,89,90,3,20,10,0,90,19,1,0,0,0,91,96,3,22,11,0,92,93,5,17,0,
-        0,93,95,3,22,11,0,94,92,1,0,0,0,95,98,1,0,0,0,96,94,1,0,0,0,96,97,
-        1,0,0,0,97,21,1,0,0,0,98,96,1,0,0,0,99,104,3,24,12,0,100,101,5,16,
-        0,0,101,103,3,24,12,0,102,100,1,0,0,0,103,106,1,0,0,0,104,102,1,
-        0,0,0,104,105,1,0,0,0,105,23,1,0,0,0,106,104,1,0,0,0,107,108,3,28,
-        14,0,108,109,3,26,13,0,109,110,3,28,14,0,110,25,1,0,0,0,111,112,
-        7,1,0,0,112,27,1,0,0,0,113,117,5,31,0,0,114,117,5,32,0,0,115,117,
-        5,33,0,0,116,113,1,0,0,0,116,114,1,0,0,0,116,115,1,0,0,0,117,29,
-        1,0,0,0,118,119,5,6,0,0,119,120,5,7,0,0,120,121,3,32,16,0,121,122,
-        5,8,0,0,122,123,5,33,0,0,123,124,5,30,0,0,124,31,1,0,0,0,125,126,
-        7,2,0,0,126,33,1,0,0,0,8,39,43,63,72,86,96,104,116
+        2,14,7,14,2,15,7,15,2,16,7,16,2,17,7,17,1,0,1,0,1,0,1,1,1,1,3,1,
+        42,8,1,1,1,1,1,3,1,46,8,1,1,1,1,1,1,2,1,2,1,2,1,3,1,3,1,3,1,4,1,
+        4,1,4,1,4,1,4,1,5,1,5,1,5,5,5,64,8,5,10,5,12,5,67,9,5,1,6,1,6,1,
+        6,1,6,1,6,1,6,3,6,75,8,6,1,7,1,7,1,7,1,8,1,8,1,8,1,8,1,8,1,8,1,8,
+        1,8,1,8,3,8,89,8,8,1,9,1,9,1,9,1,10,1,10,1,10,5,10,97,8,10,10,10,
+        12,10,100,9,10,1,11,1,11,1,11,5,11,105,8,11,10,11,12,11,108,9,11,
+        1,12,1,12,1,12,1,12,1,12,3,12,115,8,12,1,13,1,13,1,13,1,13,1,14,
+        1,14,1,15,1,15,1,15,3,15,126,8,15,1,16,1,16,1,16,1,16,1,16,1,16,
+        1,16,1,17,1,17,1,17,0,0,18,0,2,4,6,8,10,12,14,16,18,20,22,24,26,
+        28,30,32,34,0,3,1,0,14,15,1,0,18,23,1,0,9,10,129,0,36,1,0,0,0,2,
+        39,1,0,0,0,4,49,1,0,0,0,6,52,1,0,0,0,8,55,1,0,0,0,10,60,1,0,0,0,
+        12,68,1,0,0,0,14,76,1,0,0,0,16,88,1,0,0,0,18,90,1,0,0,0,20,93,1,
+        0,0,0,22,101,1,0,0,0,24,114,1,0,0,0,26,116,1,0,0,0,28,120,1,0,0,
+        0,30,125,1,0,0,0,32,127,1,0,0,0,34,134,1,0,0,0,36,37,3,2,1,0,37,
+        38,5,0,0,1,38,1,1,0,0,0,39,41,3,4,2,0,40,42,3,6,3,0,41,40,1,0,0,
+        0,41,42,1,0,0,0,42,43,1,0,0,0,43,45,3,8,4,0,44,46,3,18,9,0,45,44,
+        1,0,0,0,45,46,1,0,0,0,46,47,1,0,0,0,47,48,3,32,16,0,48,3,1,0,0,0,
+        49,50,5,1,0,0,50,51,5,33,0,0,51,5,1,0,0,0,52,53,5,2,0,0,53,54,5,
+        33,0,0,54,7,1,0,0,0,55,56,5,3,0,0,56,57,5,24,0,0,57,58,3,10,5,0,
+        58,59,5,25,0,0,59,9,1,0,0,0,60,65,3,12,6,0,61,62,5,29,0,0,62,64,
+        3,12,6,0,63,61,1,0,0,0,64,67,1,0,0,0,65,63,1,0,0,0,65,66,1,0,0,0,
+        66,11,1,0,0,0,67,65,1,0,0,0,68,69,5,31,0,0,69,70,5,28,0,0,70,71,
+        3,16,8,0,71,72,5,4,0,0,72,74,5,33,0,0,73,75,3,14,7,0,74,73,1,0,0,
+        0,74,75,1,0,0,0,75,13,1,0,0,0,76,77,5,7,0,0,77,78,7,0,0,0,78,15,
+        1,0,0,0,79,89,5,11,0,0,80,81,5,12,0,0,81,82,5,26,0,0,82,83,5,33,
+        0,0,83,89,5,27,0,0,84,85,5,13,0,0,85,86,5,26,0,0,86,87,5,33,0,0,
+        87,89,5,27,0,0,88,79,1,0,0,0,88,80,1,0,0,0,88,84,1,0,0,0,89,17,1,
+        0,0,0,90,91,5,5,0,0,91,92,3,20,10,0,92,19,1,0,0,0,93,98,3,22,11,
+        0,94,95,5,17,0,0,95,97,3,22,11,0,96,94,1,0,0,0,97,100,1,0,0,0,98,
+        96,1,0,0,0,98,99,1,0,0,0,99,21,1,0,0,0,100,98,1,0,0,0,101,106,3,
+        24,12,0,102,103,5,16,0,0,103,105,3,24,12,0,104,102,1,0,0,0,105,108,
+        1,0,0,0,106,104,1,0,0,0,106,107,1,0,0,0,107,23,1,0,0,0,108,106,1,
+        0,0,0,109,115,3,26,13,0,110,111,5,26,0,0,111,112,3,20,10,0,112,113,
+        5,27,0,0,113,115,1,0,0,0,114,109,1,0,0,0,114,110,1,0,0,0,115,25,
+        1,0,0,0,116,117,3,30,15,0,117,118,3,28,14,0,118,119,3,30,15,0,119,
+        27,1,0,0,0,120,121,7,1,0,0,121,29,1,0,0,0,122,126,5,31,0,0,123,126,
+        5,32,0,0,124,126,5,33,0,0,125,122,1,0,0,0,125,123,1,0,0,0,125,124,
+        1,0,0,0,126,31,1,0,0,0,127,128,5,6,0,0,128,129,5,7,0,0,129,130,3,
+        34,17,0,130,131,5,8,0,0,131,132,5,33,0,0,132,133,5,30,0,0,133,33,
+        1,0,0,0,134,135,7,2,0,0,135,35,1,0,0,0,9,41,45,65,74,88,98,106,114,
+        125
     ]
 
 class FetchucciniParser ( Parser ):
@@ -87,16 +91,18 @@ class FetchucciniParser ( Parser ):
     RULE_whereClause = 9
     RULE_condition = 10
     RULE_conditionAnd = 11
-    RULE_comparison = 12
-    RULE_relOp = 13
-    RULE_expression = 14
-    RULE_exportClause = 15
-    RULE_format = 16
+    RULE_conditionPrimary = 12
+    RULE_comparison = 13
+    RULE_relOp = 14
+    RULE_expression = 15
+    RULE_exportClause = 16
+    RULE_format = 17
 
     ruleNames =  [ "program", "query", "fetchClause", "eachClause", "extractClause", 
                    "fieldList", "fieldDef", "typeAnnotation", "extractor", 
-                   "whereClause", "condition", "conditionAnd", "comparison", 
-                   "relOp", "expression", "exportClause", "format" ]
+                   "whereClause", "condition", "conditionAnd", "conditionPrimary", 
+                   "comparison", "relOp", "expression", "exportClause", 
+                   "format" ]
 
     EOF = Token.EOF
     KW_FETCH=1
@@ -176,9 +182,9 @@ class FetchucciniParser ( Parser ):
         self.enterRule(localctx, 0, self.RULE_program)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 34
+            self.state = 36
             self.query()
-            self.state = 35
+            self.state = 37
             self.match(FetchucciniParser.EOF)
         except RecognitionException as re:
             localctx.exception = re
@@ -235,27 +241,27 @@ class FetchucciniParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 37
-            self.fetchClause()
             self.state = 39
+            self.fetchClause()
+            self.state = 41
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==2:
-                self.state = 38
+                self.state = 40
                 self.eachClause()
 
 
-            self.state = 41
-            self.extractClause()
             self.state = 43
+            self.extractClause()
+            self.state = 45
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==5:
-                self.state = 42
+                self.state = 44
                 self.whereClause()
 
 
-            self.state = 45
+            self.state = 47
             self.exportClause()
         except RecognitionException as re:
             localctx.exception = re
@@ -298,9 +304,9 @@ class FetchucciniParser ( Parser ):
         self.enterRule(localctx, 4, self.RULE_fetchClause)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 47
+            self.state = 49
             self.match(FetchucciniParser.KW_FETCH)
-            self.state = 48
+            self.state = 50
             localctx.url = self.match(FetchucciniParser.STRING)
         except RecognitionException as re:
             localctx.exception = re
@@ -343,9 +349,9 @@ class FetchucciniParser ( Parser ):
         self.enterRule(localctx, 6, self.RULE_eachClause)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 50
+            self.state = 52
             self.match(FetchucciniParser.KW_EACH)
-            self.state = 51
+            self.state = 53
             localctx.selector = self.match(FetchucciniParser.STRING)
         except RecognitionException as re:
             localctx.exception = re
@@ -394,13 +400,13 @@ class FetchucciniParser ( Parser ):
         self.enterRule(localctx, 8, self.RULE_extractClause)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 53
-            self.match(FetchucciniParser.KW_EXTRACT)
-            self.state = 54
-            self.match(FetchucciniParser.LBRACE)
             self.state = 55
-            self.fieldList()
+            self.match(FetchucciniParser.KW_EXTRACT)
             self.state = 56
+            self.match(FetchucciniParser.LBRACE)
+            self.state = 57
+            self.fieldList()
+            self.state = 58
             self.match(FetchucciniParser.RBRACE)
         except RecognitionException as re:
             localctx.exception = re
@@ -450,17 +456,17 @@ class FetchucciniParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 58
+            self.state = 60
             self.fieldDef()
-            self.state = 63
+            self.state = 65
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==29:
-                self.state = 59
+                self.state = 61
                 self.match(FetchucciniParser.COMMA)
-                self.state = 60
+                self.state = 62
                 self.fieldDef()
-                self.state = 65
+                self.state = 67
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -521,21 +527,21 @@ class FetchucciniParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 66
-            localctx.alias = self.match(FetchucciniParser.ID)
-            self.state = 67
-            self.match(FetchucciniParser.COLON)
             self.state = 68
-            self.extractor()
+            localctx.alias = self.match(FetchucciniParser.ID)
             self.state = 69
-            self.match(FetchucciniParser.KW_FROM)
+            self.match(FetchucciniParser.COLON)
             self.state = 70
-            localctx.selector = self.match(FetchucciniParser.STRING)
+            self.extractor()
+            self.state = 71
+            self.match(FetchucciniParser.KW_FROM)
             self.state = 72
+            localctx.selector = self.match(FetchucciniParser.STRING)
+            self.state = 74
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             if _la==7:
-                self.state = 71
+                self.state = 73
                 self.typeAnnotation()
 
 
@@ -583,9 +589,9 @@ class FetchucciniParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 74
+            self.state = 76
             self.match(FetchucciniParser.KW_AS)
-            self.state = 75
+            self.state = 77
             _la = self._input.LA(1)
             if not(_la==14 or _la==15):
                 self._errHandler.recoverInline(self)
@@ -686,37 +692,37 @@ class FetchucciniParser ( Parser ):
         localctx = FetchucciniParser.ExtractorContext(self, self._ctx, self.state)
         self.enterRule(localctx, 16, self.RULE_extractor)
         try:
-            self.state = 86
+            self.state = 88
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [11]:
                 localctx = FetchucciniParser.TextExtractorContext(self, localctx)
                 self.enterOuterAlt(localctx, 1)
-                self.state = 77
+                self.state = 79
                 self.match(FetchucciniParser.KW_TEXT)
                 pass
             elif token in [12]:
                 localctx = FetchucciniParser.AttrExtractorContext(self, localctx)
                 self.enterOuterAlt(localctx, 2)
-                self.state = 78
-                self.match(FetchucciniParser.KW_ATTR)
-                self.state = 79
-                self.match(FetchucciniParser.LPAREN)
                 self.state = 80
-                localctx.attrName = self.match(FetchucciniParser.STRING)
+                self.match(FetchucciniParser.KW_ATTR)
                 self.state = 81
+                self.match(FetchucciniParser.LPAREN)
+                self.state = 82
+                localctx.attrName = self.match(FetchucciniParser.STRING)
+                self.state = 83
                 self.match(FetchucciniParser.RPAREN)
                 pass
             elif token in [13]:
                 localctx = FetchucciniParser.RegexExtractorContext(self, localctx)
                 self.enterOuterAlt(localctx, 3)
-                self.state = 82
-                self.match(FetchucciniParser.KW_REGEX)
-                self.state = 83
-                self.match(FetchucciniParser.LPAREN)
                 self.state = 84
-                localctx.pattern = self.match(FetchucciniParser.STRING)
+                self.match(FetchucciniParser.KW_REGEX)
                 self.state = 85
+                self.match(FetchucciniParser.LPAREN)
+                self.state = 86
+                localctx.pattern = self.match(FetchucciniParser.STRING)
+                self.state = 87
                 self.match(FetchucciniParser.RPAREN)
                 pass
             else:
@@ -763,9 +769,9 @@ class FetchucciniParser ( Parser ):
         self.enterRule(localctx, 18, self.RULE_whereClause)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 88
+            self.state = 90
             self.match(FetchucciniParser.KW_WHERE)
-            self.state = 89
+            self.state = 91
             self.condition()
         except RecognitionException as re:
             localctx.exception = re
@@ -815,17 +821,17 @@ class FetchucciniParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 91
+            self.state = 93
             self.conditionAnd()
-            self.state = 96
+            self.state = 98
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==17:
-                self.state = 92
+                self.state = 94
                 self.match(FetchucciniParser.OP_OR)
-                self.state = 93
+                self.state = 95
                 self.conditionAnd()
-                self.state = 98
+                self.state = 100
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
@@ -845,11 +851,11 @@ class FetchucciniParser ( Parser ):
             super().__init__(parent, invokingState)
             self.parser = parser
 
-        def comparison(self, i:int=None):
+        def conditionPrimary(self, i:int=None):
             if i is None:
-                return self.getTypedRuleContexts(FetchucciniParser.ComparisonContext)
+                return self.getTypedRuleContexts(FetchucciniParser.ConditionPrimaryContext)
             else:
-                return self.getTypedRuleContext(FetchucciniParser.ComparisonContext,i)
+                return self.getTypedRuleContext(FetchucciniParser.ConditionPrimaryContext,i)
 
 
         def OP_AND(self, i:int=None):
@@ -877,19 +883,86 @@ class FetchucciniParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 99
-            self.comparison()
-            self.state = 104
+            self.state = 101
+            self.conditionPrimary()
+            self.state = 106
             self._errHandler.sync(self)
             _la = self._input.LA(1)
             while _la==16:
-                self.state = 100
+                self.state = 102
                 self.match(FetchucciniParser.OP_AND)
-                self.state = 101
-                self.comparison()
-                self.state = 106
+                self.state = 103
+                self.conditionPrimary()
+                self.state = 108
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
+
+        except RecognitionException as re:
+            localctx.exception = re
+            self._errHandler.reportError(self, re)
+            self._errHandler.recover(self, re)
+        finally:
+            self.exitRule()
+        return localctx
+
+
+    class ConditionPrimaryContext(ParserRuleContext):
+        __slots__ = 'parser'
+
+        def __init__(self, parser, parent:ParserRuleContext=None, invokingState:int=-1):
+            super().__init__(parent, invokingState)
+            self.parser = parser
+
+        def comparison(self):
+            return self.getTypedRuleContext(FetchucciniParser.ComparisonContext,0)
+
+
+        def LPAREN(self):
+            return self.getToken(FetchucciniParser.LPAREN, 0)
+
+        def condition(self):
+            return self.getTypedRuleContext(FetchucciniParser.ConditionContext,0)
+
+
+        def RPAREN(self):
+            return self.getToken(FetchucciniParser.RPAREN, 0)
+
+        def getRuleIndex(self):
+            return FetchucciniParser.RULE_conditionPrimary
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitConditionPrimary" ):
+                return visitor.visitConditionPrimary(self)
+            else:
+                return visitor.visitChildren(self)
+
+
+
+
+    def conditionPrimary(self):
+
+        localctx = FetchucciniParser.ConditionPrimaryContext(self, self._ctx, self.state)
+        self.enterRule(localctx, 24, self.RULE_conditionPrimary)
+        try:
+            self.state = 114
+            self._errHandler.sync(self)
+            token = self._input.LA(1)
+            if token in [31, 32, 33]:
+                self.enterOuterAlt(localctx, 1)
+                self.state = 109
+                self.comparison()
+                pass
+            elif token in [26]:
+                self.enterOuterAlt(localctx, 2)
+                self.state = 110
+                self.match(FetchucciniParser.LPAREN)
+                self.state = 111
+                self.condition()
+                self.state = 112
+                self.match(FetchucciniParser.RPAREN)
+                pass
+            else:
+                raise NoViableAltException(self)
 
         except RecognitionException as re:
             localctx.exception = re
@@ -935,14 +1008,14 @@ class FetchucciniParser ( Parser ):
     def comparison(self):
 
         localctx = FetchucciniParser.ComparisonContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 24, self.RULE_comparison)
+        self.enterRule(localctx, 26, self.RULE_comparison)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 107
+            self.state = 116
             localctx.left = self.expression()
-            self.state = 108
+            self.state = 117
             self.relOp()
-            self.state = 109
+            self.state = 118
             localctx.right = self.expression()
         except RecognitionException as re:
             localctx.exception = re
@@ -993,11 +1066,11 @@ class FetchucciniParser ( Parser ):
     def relOp(self):
 
         localctx = FetchucciniParser.RelOpContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 26, self.RULE_relOp)
+        self.enterRule(localctx, 28, self.RULE_relOp)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 111
+            self.state = 120
             _la = self._input.LA(1)
             if not((((_la) & ~0x3f) == 0 and ((1 << _la) & 16515072) != 0)):
                 self._errHandler.recoverInline(self)
@@ -1082,27 +1155,27 @@ class FetchucciniParser ( Parser ):
     def expression(self):
 
         localctx = FetchucciniParser.ExpressionContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 28, self.RULE_expression)
+        self.enterRule(localctx, 30, self.RULE_expression)
         try:
-            self.state = 116
+            self.state = 125
             self._errHandler.sync(self)
             token = self._input.LA(1)
             if token in [31]:
                 localctx = FetchucciniParser.IdExprContext(self, localctx)
                 self.enterOuterAlt(localctx, 1)
-                self.state = 113
+                self.state = 122
                 self.match(FetchucciniParser.ID)
                 pass
             elif token in [32]:
                 localctx = FetchucciniParser.NumberExprContext(self, localctx)
                 self.enterOuterAlt(localctx, 2)
-                self.state = 114
+                self.state = 123
                 self.match(FetchucciniParser.NUMBER)
                 pass
             elif token in [33]:
                 localctx = FetchucciniParser.StringExprContext(self, localctx)
                 self.enterOuterAlt(localctx, 3)
-                self.state = 115
+                self.state = 124
                 self.match(FetchucciniParser.STRING)
                 pass
             else:
@@ -1159,20 +1232,20 @@ class FetchucciniParser ( Parser ):
     def exportClause(self):
 
         localctx = FetchucciniParser.ExportClauseContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 30, self.RULE_exportClause)
+        self.enterRule(localctx, 32, self.RULE_exportClause)
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 118
+            self.state = 127
             self.match(FetchucciniParser.KW_EXPORT)
-            self.state = 119
+            self.state = 128
             self.match(FetchucciniParser.KW_AS)
-            self.state = 120
+            self.state = 129
             self.format_()
-            self.state = 121
+            self.state = 130
             self.match(FetchucciniParser.KW_TO)
-            self.state = 122
+            self.state = 131
             localctx.path = self.match(FetchucciniParser.STRING)
-            self.state = 123
+            self.state = 132
             self.match(FetchucciniParser.SEMICOLON)
         except RecognitionException as re:
             localctx.exception = re
@@ -1211,11 +1284,11 @@ class FetchucciniParser ( Parser ):
     def format_(self):
 
         localctx = FetchucciniParser.FormatContext(self, self._ctx, self.state)
-        self.enterRule(localctx, 32, self.RULE_format)
+        self.enterRule(localctx, 34, self.RULE_format)
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 125
+            self.state = 134
             _la = self._input.LA(1)
             if not(_la==9 or _la==10):
                 self._errHandler.recoverInline(self)

@@ -94,7 +94,7 @@ Los campos AUTO conservan el texto original en la exportación. En una comparaci
 WHERE categoria == "Libros" OR precio >= 10 AND precio <= 50
 ```
 
-equivale a `categoria == "Libros" OR (precio >= 10 AND precio <= 50)`. Los paréntesis explican la precedencia; la gramática no admite agrupación lógica con paréntesis.
+equivale a `categoria == "Libros" OR (precio >= 10 AND precio <= 50)`. Los paréntesis permiten cambiar la agrupación y pueden anidarse. Por ejemplo, `WHERE (categoria == "Libros" OR categoria == "Revistas") AND precio < 25` aplica el límite de precio a ambas categorías.
 
 ## Ejecución
 

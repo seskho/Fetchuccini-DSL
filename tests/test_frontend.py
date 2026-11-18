@@ -83,7 +83,11 @@ def test_optional_each_and_types(fields, each, types):
     query(fields='a: text FROM "h1" AS BOOLEAN'),
     query(fields='a: text FROM "h1" AS'),
     query(fields='a: text FROM "h1",'),
-    query(where='WHERE (titulo == "a")'),
+    query(where='WHERE ()'),
+    query(where='WHERE (titulo == "a"'),
+    query(where='WHERE titulo == "a")'),
+    query(where='WHERE (titulo == "a" OR)'),
+    query(where='WHERE (titulo) == "a"'),
     query()[:-1],
     query() + ' FETCH "https://example.com"',
 ])
@@ -232,3 +236,27 @@ def test_ir_preserves_query_fields_arguments_types_and_precedence():
         (Identifier("precio"), ">=", NumberLiteral(10.0)),
         (Identifier("precio"), "<=", NumberLiteral(50.0)),
     ]
+
+
+@pytest.mark.parametrize("where", [
+    'WHERE (titulo == "a" OR titulo == "b") AND titulo != "c"',
+    'WHERE (((titulo == "a" OR titulo == "b"))) AND (titulo != "c")',
+])
+def test_parentheses_override_precedence_in_ir(where):
+    result = compile_source(query(where=where))
+    assert result.success
+    expression = result.plan.filter_expression
+    assert isinstance(expression, AndExpression)
+    assert isinstance(expression.operands[0], OrExpression)
+    assert len(expression.operands[0].operands) == 2
+    assert isinstance(expression.operands[1], Comparison)
+
+
+@pytest.mark.parametrize("where,code", [
+    ('WHERE ((ausente == "a"))', 'S02'),
+    ('WHERE ((titulo > 10))', 'S08'),
+])
+def test_parentheses_preserve_semantic_validation(where, code):
+    result = compile_source(query(fields='titulo: text FROM "h1" AS STRING', where=where))
+    assert result.phase == "semantic" and result.plan is None
+    assert [error.code for error in result.diagnostics] == [code]

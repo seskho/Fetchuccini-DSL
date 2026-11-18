@@ -79,6 +79,11 @@ class FetchucciniParserVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by FetchucciniParser#conditionPrimary.
+    def visitConditionPrimary(self, ctx:FetchucciniParser.ConditionPrimaryContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by FetchucciniParser#comparison.
     def visitComparison(self, ctx:FetchucciniParser.ComparisonContext):
         return self.visitChildren(ctx)

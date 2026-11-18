@@ -2,14 +2,14 @@
 
 ## Fuente de verdad y cambios
 
-La sintaxis implementada está en `grammar/FetchucciniLexer.g4` y `grammar/FetchucciniParser.g4`. Se conserva el lenguaje del Hito 1 y se añaden dos capacidades opcionales: selección de registros con EACH y anotación del tipo de un campo.
+La sintaxis implementada está en `grammar/FetchucciniLexer.g4` y `grammar/FetchucciniParser.g4`. Se conserva el lenguaje del Hito 1 y se añaden selección de registros con EACH, anotación del tipo de un campo y agrupación lógica con paréntesis.
 
 | Elemento | Hito 1 | Hito 2 |
 | --- | --- | --- |
 | Consulta | FETCH EXTRACT WHERE? EXPORT | FETCH EACH? EXTRACT WHERE? EXPORT |
 | Campo | Alias, extractor y selector | Los mismos, con tipo opcional. |
 | Tipos | Sin anotación | AS STRING, AS NUMBER; AUTO interno por omisión. |
-| Lógica | AND con mayor precedencia que OR | Conservada. |
+| Lógica | AND con mayor precedencia que OR | Conservada; paréntesis para cambiar la agrupación. |
 | Extractores | text, attr y regex | Conservados. |
 | Terminación | Punto y coma obligatorio | Conservada. |
 
@@ -83,7 +83,12 @@ condition
     ;
 
 conditionAnd
-    : comparison (OP_AND comparison)*
+    : conditionPrimary (OP_AND conditionPrimary)*
+    ;
+
+conditionPrimary
+    : comparison
+    | LPAREN condition RPAREN
     ;
 
 comparison
@@ -140,7 +145,7 @@ La instancia de lexemas `precio: regex("[0-9.]+") FROM ".price" AS NUMBER` utili
 
 `condition` combina unidades `conditionAnd` mediante OR. Cada unidad interna combina comparaciones mediante AND. Así, `A OR B AND C` tiene estructura `Or(A, And(B, C))`. El constructor de la IR conserva esa estructura y el runtime la recorre con cortocircuito.
 
-No se añaden paréntesis de agrupación lógica. Los paréntesis existentes pertenecen a `attr(...)` y `regex(...)`.
+Se admite agrupación lógica con paréntesis anidados mediante `conditionPrimary`. Así, `(A OR B) AND C` produce `And(Or(A, B), C)`. Sin paréntesis, se conserva AND > OR. Los grupos deben contener condiciones completas; no se admiten grupos vacíos ni paréntesis alrededor de operandos aislados.
 
 ## Ejemplos válidos
 
@@ -175,7 +180,7 @@ Validez sintáctica o semántica no garantiza autorización HTTP: la lista de or
 | Dos cláusulas EACH | Sintáctica | La regla admite como máximo una. |
 | `EXTRACT {}` | Sintáctica | `fieldList` exige al menos un campo. |
 | `titulo: text FROM "h1" AS BOOLEAN` | Sintáctica | Tipo no incluido en `typeAnnotation`. |
-| `WHERE (precio < 10)` | Sintáctica | No hay agrupación lógica con paréntesis. |
+| `WHERE (precio < 10` | Sintáctica | Falta cerrar el grupo lógico. |
 | Falta el `;` final | Sintáctica | EXPORT debe terminar la consulta. |
 | `FETCH "ftp://example.com" ...` | Semántica, S03 | La estructura usa STRING, pero el esquema no está admitido. |
 | `EACH "div["` | Semántica, S04 | Es una cadena válida, pero un selector inválido. |

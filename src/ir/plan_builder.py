@@ -49,8 +49,11 @@ class PlanBuilder(FetchucciniParserVisitor):
         return operands[0] if len(operands) == 1 else OrExpression(operands)
 
     def visitConditionAnd(self, ctx):
-        operands = tuple(self.visit(child) for child in ctx.comparison())
+        operands = tuple(self.visit(child) for child in ctx.conditionPrimary())
         return operands[0] if len(operands) == 1 else AndExpression(operands)
+
+    def visitConditionPrimary(self, ctx):
+        return self.visit(ctx.condition() if ctx.condition() is not None else ctx.comparison())
 
     def visitComparison(self, ctx):
         return Comparison(

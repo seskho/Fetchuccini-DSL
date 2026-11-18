@@ -186,3 +186,20 @@ def test_exact_books_example_on_fixture(catalog_html, tmp_path):
     result = execute_plan(compiled.plan, tmp_path, html=catalog_html)
     assert (result.found_count, result.filtered_count, result.exported_count) == (3, 2, 2)
     assert [row["precio"] for row in result.records] == [12.5, 20.0]
+
+
+def test_grouped_conditions_change_exported_records(make_plan, tmp_path):
+    html = '<article><b>Libros</b><i>40</i></article><article><b>Revistas</b><i>10</i></article>'
+    fields = 'categoria: text FROM "b" AS STRING, precio: text FROM "i" AS NUMBER'
+    ungrouped = make_plan(fields, 'WHERE categoria == "Libros" OR categoria == "Revistas" AND precio < 25', each='EACH "article"')
+    grouped = make_plan(fields, 'WHERE (categoria == "Libros" OR categoria == "Revistas") AND precio < 25', each='EACH "article"')
+    assert execute_plan(ungrouped, tmp_path, html=html).exported_count == 2
+    result = execute_plan(grouped, tmp_path, html=html)
+    assert result.records == [{"categoria": "Revistas", "precio": 10.0}]
+    assert json.loads(result.output_path.read_text(encoding="utf-8")) == result.records
+
+
+def test_grouped_conditions_keep_short_circuit(make_plan):
+    plan = make_plan('a: text FROM "b", precio: text FROM "i"',
+                     'WHERE (a == "si" OR precio > 10) AND a != "no"')
+    assert evaluate_filter(plan.filter_expression, {"a": "si", "precio": "no numerico"}, plan.fields)
