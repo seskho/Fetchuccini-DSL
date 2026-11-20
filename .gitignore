@@ -50,3 +50,8 @@ desktop.ini
 .antlr/
 *.tokens
 *.interp
+
+# Herramientas descargadas y resultados de ejecución
+.tools/
+outputs/*
+!outputs/.gitkeep

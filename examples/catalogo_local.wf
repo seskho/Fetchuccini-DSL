@@ -1,0 +1,11 @@
+-- Ejecutar con --execute --html tests/fixtures/catalogo.html
+FETCH "https://books.toscrape.com/"
+EACH "article.product_pod"
+EXTRACT {
+    titulo: text FROM "h3 a" AS STRING,
+    enlace: attr("href") FROM "h3 a",
+    precio: regex("[0-9.]+") FROM ".price_color" AS NUMBER,
+    disponibilidad: text FROM ".availability" AS STRING
+}
+WHERE precio >= 10 AND precio < 25
+EXPORT AS JSON TO "catalogo/productos.json";

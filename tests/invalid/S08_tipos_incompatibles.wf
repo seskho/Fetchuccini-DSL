@@ -1,0 +1,4 @@
+FETCH "https://example.com"
+EXTRACT { titulo: text FROM "h1" AS STRING }
+WHERE titulo > 10
+EXPORT AS JSON TO "datos.json";

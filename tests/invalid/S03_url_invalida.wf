@@ -1,0 +1,3 @@
+FETCH "ftp://ejemplo.com"
+EXTRACT { titulo: text FROM "h1" }
+EXPORT AS JSON TO "datos.json";

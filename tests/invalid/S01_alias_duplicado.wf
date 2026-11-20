@@ -1,0 +1,6 @@
+FETCH "https://example.com"
+EXTRACT {
+    titulo: text FROM "h1",
+    titulo: text FROM "h2"
+}
+EXPORT AS JSON TO "datos.json";

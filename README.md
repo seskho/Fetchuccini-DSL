@@ -1,164 +1,233 @@
-# Fetchuccini-DSL
+# Fetchuccini-DSL · Hito 2
 
-> **Lenguaje de Dominio Específico (DSL) declarativo orientado a la extracción estructurada de información web (Web Scraping).**
+Fetchuccini es un lenguaje declarativo para extraer datos de HTML estático mediante selectores CSS, filtrar registros y exportarlos a JSON o CSV. WebFetch desarrolla este proyecto para el curso Teoría de Compiladores de la UPC.
 
----
+## Información del proyecto
 
-## 📌 Información del Proyecto
+| Dato | Valor |
+| --- | --- |
+| Institución | Universidad Peruana de Ciencias Aplicadas |
+| Carrera | Ciencias de la Computación |
+| Curso | Teoría de Compiladores, 1ACC0218 |
+| Sección | 13962 |
+| Profesor | Marco Antonio Sobrevilla Cabezudo |
+| Ciclo | 2026-2 |
+| Startup / producto | WebFetch / Fetchuccini |
+| Entrega | Hito 2, segundo avance |
+| Repositorio | [Fetchuccini-DSL](https://github.com/seskho/Fetchuccini-DSL) |
 
-- **Institución:** Universidad Peruana de Ciencias Aplicadas (UPC)
-- **Carrera:** Ciencias de la Computación
-- **Curso:** Teoría de Compiladores (1ACC0218)
-- **Sección:** 13962
-- **Profesor:** Marco Antonio Sobrevilla Cabezudo
-- **Ciclo:** 2026-2
-- **Startup:** WebFetch
-- **Producto / Lenguaje:** Fetchuccini
-- **Entregable:** Hito 1 - Trabajo Parcial
+| Integrante | Contribución registrada en el Hito 1 |
+| --- | --- |
+| Diaz Orihuela, Jose Andres | Análisis semántico y driver |
+| Garcia Hernandez, Alejandro Jhoshua | Construcciones del lenguaje y gramática |
+| Landauro La Rosa, Ian Joshua | Construcciones del lenguaje y pruebas |
+| Meza Dagnino, Francesco Andre | Analizador léxico y analizador sintáctico |
 
----
+## Alcance del Hito 2
 
-## 👥 Integrantes del Equipo
+El front-end de ANTLR4 conserva las consultas anteriores y añade `EACH`, tipos opcionales y ocho diagnósticos semánticos. Una representación intermedia estructurada conecta ese análisis con un runtime que obtiene HTML, extrae campos, convierte números, evalúa `WHERE` y escribe archivos reales.
 
-| Apellidos y Nombres | Rol / Contribución |
-| :--- | :--- |
-| **Diaz Orihuela, Jose Andres** | Análisis Semántico & Driver |
-| **Garcia Hernandez, Alejandro Jhoshua** | Construcciones del Lenguaje & Gramática |
-| **Landauro La Rosa, Ian Joshua** | Construcciones del Lenguaje & Pruebas |
-| **Meza Dagnino, Francesco Andre** | Analizador Léxico & Analizador Sintáctico |
+La validación es el modo predeterminado: no realiza HTTP ni exporta archivos. La ejecución debe solicitarse con `--execute`. El avance académico, las limitaciones y las pruebas realmente ejecutadas se registran en [ESTADO_HITO2.md](docs/ESTADO_HITO2.md).
 
----
+## Instalación
 
-## 📖 Descripción y Motivación
+Se requiere Python 3.10 o superior. Java es necesario únicamente para regenerar ANTLR; los archivos generados están incluidos. La verificación de esta entrega utiliza Python 3.12.14 y Java 25.
 
-Tradicionalmente, la extracción automatizada de datos web suele implementarse mediante lenguajes imperativos de propósito general como Python o JavaScript. Esto obliga a programar manualmente peticiones HTTP, procesamiento del DOM, bucles de iteración y serialización a formatos como JSON o CSV, generando código repetitivo y propenso a fallas.
+Desde la raíz del repositorio, en PowerShell:
 
-**Fetchuccini** es un lenguaje de dominio específico (DSL) de carácter declarativo inspirado en la simplicidad de SQL. Permite definir concisamente **qué** datos extraer, **de dónde** y **cómo filtrarlos o exportarlos**, reduciendo complejas rutinas a consultas directas estructuradas en cuatro construcciones principales:
-
-1. **`FETCH`**: Define la fuente web de la consulta mediante una URL (`STRING`).
-2. **`EXTRACT`**: Define los campos a extraer utilizando un alias (`ID`), un mecanismo de extracción y un selector CSS/XPath (`STRING`):
-   - `text`: Extrae el contenido textual de un elemento.
-   - `attr("nombre")`: Extrae el valor de un atributo HTML (ej. `href`, `src`).
-   - `regex("patron")`: Extrae coincidencias mediante una expresión regular.
-3. **`WHERE`** *(opcional)*: Filtra los resultados mediante comparaciones relacionales (`==`, `!=`, `<`, `<=`, `>`, `>=`) y operadores lógicos (`AND`, `OR`).
-   - **Precedencia lógica:** El operador `AND` posee mayor precedencia que `OR`.
-4. **`EXPORT`**: Define el formato de serialización (`JSON` o `CSV`) y la ruta del archivo de destino, finalizando obligatoriamente con punto y coma (`;`).
-
-### Ejemplo de Consulta Válida:
-```sql
-FETCH "https://prueba.com/tienda"
-EXTRACT {
-    titulo: text FROM "h1",
-    enlace: attr("href") FROM "a.producto",
-    precio: regex("[0-9.]+") FROM ".precio"
-}
-WHERE precio >= 10 AND precio <= 50
-EXPORT AS JSON TO "resultados.json";
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt
 ```
 
----
+Los comandos siguientes usan `python` para facilitar su lectura. Se pueden ejecutar activando el entorno (`.\.venv\Scripts\Activate.ps1`) o sustituyendo `python` por `.\.venv\Scripts\python.exe`. Si Windows abre Microsoft Store al invocar `python`, debe utilizarse un intérprete instalado o la ruta del entorno; ese acceso directo no es un intérprete.
 
-## 🎯 Alcance del Hito 1 y Limitaciones
+Las dependencias de ejecución son ANTLR4 Python Runtime 4.13.2, Requests, Beautiful Soup, Soup Sieve y urllib3. Pytest ejecuta las pruebas. Las versiones exactas están fijadas en [requirements.txt](requirements.txt).
 
-El Hito 1 corresponde a la implementación completa del **Front-End** del compilador:
-- ✅ **Analizador Léxico (Lexer):** Reconocimiento de 30 tokens terminales, descarte de espacios en blanco (`WS`) y comentarios (`COMMENT`).
-- ✅ **Analizador Sintáctico (Parser):** Validación de la estructura no ambigua de consultas respetando la jerarquía `FETCH → EXTRACT → WHERE? → EXPORT` y la precedencia `AND > OR`.
-- ✅ **Analizador Semántico Preliminar:** Detección y reporte con línea y columna de:
-  1. *Campos duplicados* dentro del bloque `EXTRACT`.
-  2. *Campos no declarados* evaluados en la cláusula `WHERE`.
-- ✅ **Driver y Suite de Pruebas:** Ejecución secuencial y verificación automatizada.
-
-**Limitaciones actuales (Fuera del alcance de Hito 1):**
-- No se ejecutan peticiones HTTP reales a la red ni scraping en vivo.
-- No se realiza la generación física de archivos JSON/CSV en disco (esto corresponde al Back-End en etapas posteriores).
-- No se admiten múltiples URLs en una sola consulta, agregaciones ni subconsultas.
-
----
-
-## 📂 Estructura del Repositorio
+## Sintaxis
 
 ```text
-WebFetch/
-│
-├── docs/                               # Documentación y artefactos de entrega
-│   └── .gitkeep                        # (Informe final en PDF)
-│
-├── grammar/                            # Especificaciones formales en ANTLR4
-│   ├── FetchucciniLexer.g4             # Analizador léxico (expresiones regulares y tokens)
-│   └── FetchucciniParser.g4            # Analizador sintáctico (gramáticas libres de contexto)
-│
-├── src/                                # Código fuente del compilador
-│   ├── generated/                      # Clases generadas automáticamente por ANTLR4
-│   │   ├── FetchucciniLexer.py
-│   │   ├── FetchucciniParser.py
-│   │   ├── FetchucciniParserVisitor.py
-│   │   └── __init__.py
-│   ├── semantic/                       # Analizador semántico preliminar
-│   │   ├── __init__.py
-│   │   └── semantic_checker.py         # Visitor que valida las 2 reglas semánticas
-│   ├── driver.py                       # Driver principal ejecutable por CLI
-│   └── __init__.py
-│
-├── tests/                              # Suite de pruebas del compilador
-│   ├── run_tests.py                    # Ejecutor automatizado de toda la suite
-│   ├── valid/                          # Casos de prueba que deben compilar con éxito
-│   │   ├── 01_consulta_basica.wf
-│   │   ├── 02_extraccion_multiple.wf
-│   │   ├── 03_filtro_complejo.wf
-│   │   ├── 04_filtro_or.wf
-│   │   └── 05_precedencia_logica.wf
-│   └── invalid/                        # Casos con errores intencionales para cada etapa
-│       ├── 04_error_sintactico.wf      # Violación sintáctica (falta delimitador)
-│       ├── 05_error_campo_duplicado.wf # Error semántico 1: alias duplicado en EXTRACT
-│       ├── 06_error_campo_no_declarado.wf # Error semántico 2: campo no declarado en WHERE
-│       └── 07_error_lexico.wf          # Error léxico: carácter no reconocido
-│
-├── .gitignore                          # Exclusión de entornos virtuales y temporales
-├── requirements.txt                    # Dependencia fijada: antlr4-python3-runtime==4.13.2
-└── README.md                           # Documentación principal
+FETCH "https://books.toscrape.com/"
+EACH "article.product_pod"
+EXTRACT {
+    titulo: attr("title") FROM "h3 a" AS STRING,
+    precio: regex("[0-9.]+") FROM "p.price_color" AS NUMBER,
+    disponibilidad: text FROM ".availability" AS STRING
+}
+WHERE precio < 25.00
+EXPORT AS CSV TO "libros.csv";
 ```
 
----
+| Construcción | Regla |
+| --- | --- |
+| `FETCH STRING` | Obligatoria, una URL HTTP o HTTPS con hostname válido. |
+| `EACH STRING` | Opcional, después de FETCH; cada coincidencia CSS representa un registro. |
+| `EXTRACT { alias: extractor FROM STRING [AS tipo], ... }` | Obligatoria, al menos un campo y alias únicos. |
+| `WHERE expresión` | Opcional; comparaciones combinadas con AND y OR. |
+| `EXPORT AS JSON TO STRING;` / `EXPORT AS CSV TO STRING;` | Obligatoria, ruta relativa y extensión coherente. |
 
-## ⚙️ Requisitos e Instalación
+Las palabras clave se escriben en mayúsculas, y los mecanismos `text`, `attr` y `regex` en minúsculas. Los comentarios comienzan con `--`. Las cadenas usan comillas dobles. Un patrón regex que necesite `\d` se escribe `"\\d+"` en el DSL: la primera barra protege la segunda dentro del literal.
 
-### Prerrequisitos:
-- **Python** 3.10 o superior.
-- **Java Development Kit (JDK)** 17 o superior (necesario únicamente si se desea regenerar las gramáticas con la herramienta ANTLR4).
+Sin `EACH`, el documento completo constituye un único contexto. Con `EACH`, los selectores de los campos buscan dentro de cada elemento seleccionado. Si `EACH` no encuentra elementos, se exporta una colección vacía.
 
-### Instalación de dependencias:
-```bash
-pip install -r requirements.txt
+| Extractor | Valor del primer elemento coincidente |
+| --- | --- |
+| `text` | Texto con espacios normalizados. |
+| `attr("nombre")` | Atributo solicitado. |
+| `regex("patrón")` | Primera coincidencia completa sobre el texto original, conservando espacios y saltos. |
+
+Un selector válido sin coincidencias, un atributo ausente o una regex sin coincidencias producen `None`. Un selector CSS o patrón regex inválido produce un error semántico antes de cualquier HTTP.
+
+## Tipos y filtros
+
+`AS STRING` conserva texto; `AS NUMBER` convierte el valor extraído a `float` finito. Sin anotación se asigna el tipo interno `AUTO`, compatible con el Hito 1. Un valor ausente conserva `None` incluso si su campo es NUMBER.
+
+Los campos AUTO conservan el texto original en la exportación. En una comparación numérica, el runtime puede convertir temporalmente ese texto a número. Una conversión imposible se reporta como error de ejecución con el campo y el índice del registro.
+
+`<`, `<=`, `>` y `>=` comparan números o valores convertibles. Un campo explícitamente STRING no participa en ordenamientos numéricos. `==` y `!=` comparan cadenas o números compatibles; una incompatibilidad conocida entre tipos explícitos se rechaza en semántica. Cuando la incompatibilidad depende del HTML, se detecta durante la ejecución.
+
+**Toda comparación con `None` es falsa, también `!=`.** JSON lo representa como `null`; CSV, como celda vacía. No existe un literal `NULL` en esta versión.
+
+`AND` tiene mayor precedencia que `OR`, y ambos usan cortocircuito. Por ejemplo:
+
+```text
+WHERE categoria == "Libros" OR precio >= 10 AND precio <= 50
 ```
 
----
+equivale a `categoria == "Libros" OR (precio >= 10 AND precio <= 50)`. Los paréntesis permiten cambiar la agrupación y pueden anidarse. Por ejemplo, `WHERE (categoria == "Libros" OR categoria == "Revistas") AND precio < 25` aplica el límite de precio a ambas categorías.
 
-## 🚀 Guía de Ejecución
+## Ejecución
 
-### 1. Ejecutar una consulta con el Driver:
-El script `src/driver.py` ejecuta de forma secuencial las fases léxica, sintáctica y semántica:
-
-```bash
-# Probar una consulta válida:
+```powershell
+# Consulta del Hito 1: solo validación
 python src/driver.py tests/valid/01_consulta_basica.wf
 
-# Probar con visualización de tokens reconocidos:
+# Tokens; --verbose conserva esta función y añade detalles
+python src/driver.py tests/valid/01_consulta_basica.wf --tokens
 python src/driver.py tests/valid/01_consulta_basica.wf --verbose
 
-# Probar la detección de errores (ej. semántico):
-python src/driver.py tests/invalid/05_error_campo_duplicado.wf
+# Consulta con EACH: validación explícita
+python src/driver.py examples/books_demo.wf --validate-only
+
+# Error semántico nuevo; salida distinta de cero
+python src/driver.py tests/invalid/S05_regex_invalida.wf
+
+# Extracción local reproducible, sin conexión HTTP
+python src/driver.py examples/catalogo_local.wf --execute --html tests/fixtures/catalogo.html
+
+# Demostración real: CSV y JSON en outputs/
+python src/driver.py examples/books_demo.wf --execute
+python src/driver.py examples/books_json.wf --execute
+
+# Los mismos formatos usando HTML local
+python src/driver.py examples/books_demo.wf --execute --html tests/fixtures/catalogo.html
+python src/driver.py examples/books_json.wf --execute --html tests/fixtures/catalogo.html
 ```
 
-### 2. Ejecutar la Suite Automatizada de Pruebas:
-Para verificar que todos los casos válidos e inválidos se comporten exactamente según lo especificado:
+`--execute` y `--validate-only` son mutuamente excluyentes. `--html` exige `--execute` y sustituye la obtención HTTP por un archivo local UTF-8; no cambia la validación de la consulta. El programa informa registros encontrados, conservados tras el filtro, descartados y exportados, además de la ruta final. `run_compiler(file_path, verbose=False)` sigue devolviendo `(éxito, fase_fallida)`; la fase `runtime` distingue fallos de ejecución de los errores `io`, `lexical`, `syntax` y `semantic`.
 
-```bash
+Los nombres de salida se resuelven bajo `outputs/` de la raíz del proyecto, incluso al invocar el driver desde otro directorio. Se admiten subdirectorios relativos; se rechazan rutas absolutas, `..` y escapes del directorio permitido. La validación de nombre y extensión es semántica; un fallo de permisos o disco es de ejecución. JSON conserva números, Unicode y `null`; CSV mantiene el orden de declaración de los alias y crea encabezados incluso sin registros.
+
+## Red y límites de seguridad
+
+El cliente real se restringe por defecto a los orígenes `http://books.toscrape.com:80` y `https://books.toscrape.com:443`. Una URL HTTP válida de otro origen puede compilar, pero el cliente la rechaza al ejecutar. La API permite configurar explícitamente otros orígenes; la CLI no amplía esta lista.
+
+Requests usa un adaptador con urllib3 que conecta a una dirección pública aprobada y comprueba el peer del socket. Cada redirección vuelve a validar el origen y el destino. Se desactivan proxies del entorno, se mantiene la verificación TLS y se aplican límites de tamaño, tiempo y redirecciones. Los detalles y límites están en [ARQUITECTURA_HITO2.md](docs/ARQUITECTURA_HITO2.md). Las pruebas principales usan HTML local y clientes simulados.
+
+## Arquitectura y archivos
+
+```mermaid
+flowchart LR
+    A["Código .wf"] --> B["ANTLR Lexer"]
+    B --> C["ANTLR Parser"]
+    C --> D["Semántica y tabla de símbolos"]
+    D --> E["Plan intermedio"]
+    E --> F["Runtime de extracción y filtrado"]
+    F --> G["JSON / CSV"]
+```
+
+```text
+grammar/               Lexer y parser ANTLR4
+scripts/               Regeneración reproducible
+src/generated/         Artefactos ANTLR4; no editar a mano
+src/semantic/          Visitor, Symbol y SymbolTable
+src/ir/                Dataclasses y construcción del plan
+src/runtime/           HTTP, HTML, extracción, tipos, filtros y exportación
+src/compiler.py        Front-end reutilizable
+src/driver.py          CLI y compatibilidad run_compiler
+src/literals.py        Decodificación de cadenas
+src/output_paths.py    Validación y confinamiento de salidas
+examples/              Consultas locales y Books to Scrape
+tests/fixtures/        HTML ficticio para pruebas sin red
+tests/valid/           Cinco consultas originales del Hito 1
+tests/invalid/         Casos originales y S01-S08
+tests/test_*.py        Pruebas automatizadas del Hito 2
+docs/                  Documentación técnica y evidencia
+outputs/               Resultados de ejecución; ignorados por Git
+```
+
+El runtime consume dataclasses independientes de ANTLR. Los filtros son nodos `Comparison`, `AndExpression`, `OrExpression` e identificadores/literales; nunca se ejecutan como código Python. La IR no supone una sustitución académica aprobada de LLVM: esa decisión corresponde al docente para el Hito 3.
+
+## Ocho errores semánticos
+
+| Código | Regla |
+| --- | --- |
+| S01 | Alias repetido en EXTRACT. |
+| S02 | Identificador no declarado usado en WHERE. |
+| S03 | URL con esquema o hostname no admitido. |
+| S04 | Selector CSS inválido en EACH o EXTRACT. |
+| S05 | Expresión regular inválida. |
+| S06 | Nombre de atributo vacío tras eliminar espacios externos. |
+| S07 | Formato/extensión incompatibles o ruta de salida insegura. |
+| S08 | Comparación con tipos conocidos incompatibles. |
+
+Los diagnósticos incluyen código, fase, línea y columna. Se acumulan errores independientes de manera segura. Las reglas, ejemplos y pruebas asociadas están en [SEMANTICA_HITO2.md](docs/SEMANTICA_HITO2.md).
+
+## Regeneración de ANTLR4
+
+```powershell
+python scripts/generate_antlr.py
+python scripts/generate_antlr.py --check
+# Usar un JAR oficial local (cambiar la ruta por su ubicación)
+python scripts/generate_antlr.py --check --jar C:/herramientas/antlr-4.13.2-complete.jar
+```
+
+El script usa exclusivamente ANTLR 4.13.2, valida el hash del JAR y lo almacena en `.antlr/`. La primera descarga requiere internet; puede utilizarse un JAR oficial local según la ayuda del script. `--check` regenera en un directorio temporal y compara los tres módulos Python byte por byte. No se modifican manualmente los archivos de `src/generated/`.
+
+## Pruebas
+
+```powershell
+# Las nueve pruebas originales, sin cambios
 python tests/run_tests.py
+
+# Suite completa reproducible; no realiza peticiones a internet
+python -m pytest -q
+
+# Integración externa, solo cuando se solicita explícitamente
+python -m pytest -q -m integration --run-live
 ```
 
-### 3. Regenerar Gramáticas ANTLR4 (Opcional):
-Los archivos en `src/generated/` ya se encuentran provistos en el repositorio. Si se modifica alguna gramática en `grammar/`, se pueden regenerar con:
+La integración externa está deshabilitada en la ejecución normal. Sus cantidades dependen de la respuesta observada; no son constantes utilizadas para aprobar la suite local. [PLAN_VALIDACION_HITO2.md](docs/PLAN_VALIDACION_HITO2.md) explica niveles, entradas y criterios de aceptación. [ESTADO_HITO2.md](docs/ESTADO_HITO2.md) registra los resultados de esta entrega.
 
-```bash
-antlr4 -Dlanguage=Python3 -visitor -no-listener -o src/generated grammar/FetchucciniLexer.g4 grammar/FetchucciniParser.g4
+## Documentación y trabajo posterior
+
+- [Arquitectura](docs/ARQUITECTURA_HITO2.md): contratos, responsabilidades y decisiones.
+- [Gramática](docs/GRAMATICA_HITO2.md): cambios léxicos, reglas, precedencia y compatibilidad.
+- [Semántica](docs/SEMANTICA_HITO2.md): S01-S08, tipos y política de ausencias.
+- [Plan de validación](docs/PLAN_VALIDACION_HITO2.md): pruebas y criterios verificables.
+- [Estado](docs/ESTADO_HITO2.md): evidencia ejecutada, pendientes y límites.
+- [Entrega e informe](docs/ENTREGA_HITO2.md): inventario de archivos, comandos de demostración y cambios sugeridos al informe histórico.
+
+Solo se procesa HTML estático de una página por consulta. Quedan fuera del Hito 2 `LIMIT`, `ORDER BY`, `JOIN`, `GROUP BY`, agregaciones, subconsultas, múltiples FETCH, EACH anidados, XPath, paginación automática, autenticación, JavaScript, funciones de usuario, aritmética general y LLVM. Para el Hito 3 corresponde acordar con el docente la ruta de generación de código, ampliar la evidencia de validación y preparar el informe, la presentación y el video, sin atribuir a esta entrega capacidades pendientes.
+
+
+## Mejoras de expresividad y diagnóstico
+
+- WHERE admite paréntesis anidados, manteniendo AND > OR fuera de los grupos.
+- NUMBER admite enteros y decimales negativos (`-10`, `-0.5`). El signo debe estar unido al número. `--` continúa iniciando comentarios; no hay resta ni signo positivo explícito.
+- Los errores de conversión de campos indican línea y columna de la declaración; los errores al evaluar WHERE indican la comparación, además del campo y registro. Los errores de red y disco conservan sus diagnósticos por fase sin atribuir una ubicación ficticia.
+- `--emit-ir planes/consulta.json` exporta el plan compilado en JSON UTF-8 bajo outputs, con nodos etiquetados, posiciones y `ir_version: 1`. Puede combinarse con --validate-only o --execute. Solo se escribe tras compilar correctamente; no realiza HTTP por sí mismo. Sin esa opción, validar sigue sin crear archivos. Las rutas usan las mismas restricciones que las exportaciones; los errores de escritura de IR se reportan como IO02. El JSON permite inspección y demostración; no se ofrece todavía carga de planes desde archivos.
+
+```powershell
+python src/driver.py examples/books_demo.wf --validate-only --emit-ir planes/books.json
 ```

@@ -1,0 +1,3 @@
+# Conservar los bytes emitidos por ANTLR en checkouts de Windows.
+# Los espacios finales son parte de las plantillas del generador oficial.
+src/generated/*.py text eol=lf whitespace=-blank-at-eol
